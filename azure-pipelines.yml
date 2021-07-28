@@ -39,6 +39,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
