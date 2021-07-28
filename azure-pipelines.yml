@@ -46,20 +46,3 @@ steps:
   # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#package-and-deliver-your-code
 
 
-steps:
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-
-- task: PublishBuildArtifacts@1
-  displayname: 'Publish artifacts'
-
-# inputs:
-#    targetPath: '$(Build.ArtifactStagingDirectory)' 
-#   artifactName: 'myTestWeatherSite'
