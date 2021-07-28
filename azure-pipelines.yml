@@ -28,8 +28,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# This step performs a unit test before building the solution file.
-
 - task: DotNetCoreCLI@2
   inputs:
     command: test
@@ -41,14 +39,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# The steps below helps to Package and deliver your code
-
-  # https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#package-and-deliver-your-code
-
-
 
 steps:
-
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
@@ -57,9 +49,6 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myTestSite'
+  displayName: 'publish artifacts'
 
